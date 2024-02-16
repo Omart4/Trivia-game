@@ -45,3 +45,7 @@ img{
 .start:hover{
     opacity: .7;
 }
+#disable{
+    pointer-events: none;
+    cursor: not-allowed;
+}

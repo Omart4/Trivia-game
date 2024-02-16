@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../assets/pngtree-trivia-night-speech-bubble-png-image_6568577.png";
 import CategorySelect from "../Components/CategorySelect";
-import '../Styles/MainPage.css'
+import "../Styles/MainPage.css";
+import { Link } from "react-router-dom";
+import GlobalContext from "../Components/GlobalContext";
 
-const MainPage = (props) => {
+const MainPage = ({ setApi }) => {
   //States
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [ready, setReady] = useState(false);
+  const global = useContext(GlobalContext);
 
   const baseUrl = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}`;
 
@@ -48,17 +51,20 @@ const MainPage = (props) => {
           <option value="hard">Hard</option>
         </select>
       </div>
-      <button
-        onClick={() => {
+
+      <Link
+        to="game"
+        state={{ api: baseUrl }}
+        onClick={(e) => {
           console.log(baseUrl);
-          if (!ready) {
-            alert("Choose an amount of questions");
-          }
+          global.setApi(baseUrl);
         }}
+        id={!ready ? "disable" : ""}
         className="start"
       >
         Start
-      </button>
+      </Link>
+      
     </div>
   );
 };
