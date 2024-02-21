@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react"
-import { useLoaderData, useLocation } from "react-router-dom";
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import GlobalContext from "../Components/GlobalContext";
 import { Loading } from "../Components/Loader";
+import '../Styles/GamePage.css'
+import Question from "../Components/Question";
 
 const GamePage = () => {
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(true)
     const g_data = useContext(GlobalContext)
-    const [count,setCount] = useState(0)
 
     const fetchData = async (api) => {
         fetch(api)
@@ -27,7 +27,10 @@ const GamePage = () => {
 
   return (
     <div className="game">
-      {loading? <Loading/>:`<p>${JSON.stringify(data.results)}</p>`}
+      {loading && <Loading/>}
+      {!loading && data.results.map((question_data)=>(
+        <Question quest = {question_data}/>
+      ))}
     </div>
   )
 };

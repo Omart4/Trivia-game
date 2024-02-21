@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Logo from "../assets/pngtree-trivia-night-speech-bubble-png-image_6568577.png";
 import CategorySelect from "../Components/CategorySelect";
 import "../Styles/MainPage.css";
-import { Link } from "react-router-dom";
 import GlobalContext from "../Components/GlobalContext";
 
 const MainPage = ({ setApi }) => {
@@ -52,18 +51,17 @@ const MainPage = ({ setApi }) => {
         </select>
       </div>
 
-      <Link
-        to="game"
-        state={{ api: baseUrl }}
+      <button
         onClick={(e) => {
           console.log(baseUrl);
           global.setApi(baseUrl);
+          global.setGameOn(true)
         }}
         id={!ready ? "disable" : ""}
         className="start"
       >
         Start
-      </Link>
+      </button>
       
     </div>
   );
